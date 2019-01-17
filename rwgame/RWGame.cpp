@@ -33,7 +33,7 @@ static constexpr std::array<
                     {GameRenderer::ZoneCylinderB, "zonecylb.dff", "particle"},
                     {GameRenderer::Arrow, "arrow.dff", ""}}};
 
-constexpr float kMaxPhysicsSubSteps = 2;
+constexpr float kMaxPhysicsSubSteps = 4;
 }  // namespace
 
 #define MOUSE_SENSITIVITY_SCALE 2.5f
