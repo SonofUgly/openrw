@@ -215,19 +215,6 @@ if(RUN_TESTS)
 else()
     message(STATUS "Skipping tests...")
 endif()
-if(SUBMIT)
-    message(STATUS "Submitting to CDash...")
-    ctest_submit(
-        RETRY_COUNT 5
-        RETRY_DELAY 120
-        RETURN_VALUE _SUBMIT_RESULT
-        )
-    if(_SUBMIT_RESULT)
-        emit_warning("Test submission failure detected!")
-    endif()
-else()
-    message(STATUS "Submit skipped.")
-endif()
 
 if(TEST_COVERAGE)
     message(STATUS "Collecting coverage and submitting to codecov.io...")
@@ -240,19 +227,6 @@ if(TEST_COVERAGE)
     if(_COVERAGE_COLLECT_RV)
         emit_error("Collecting and uploading coverage failed!")
     endif()
-    if(SUBMIT)
-        message(STATUS "Submitting to CDash...")
-        ctest_submit(
-            RETRY_COUNT 5
-            RETRY_DELAY 120
-            RETURN_VALUE _SUBMIT_RESULT
-            )
-        if(_SUBMIT_RESULT)
-            emit_warning("Test submission failure detected!")
-        endif()
-    else()
-        message(STATUS "Submit skipped.")
-    endif()
 
     message(STATUS "Cleaning collected coverage data...")
     ctest_build(APPEND
@@ -262,19 +236,6 @@ if(TEST_COVERAGE)
         )
     if(_COVERAGE_CLEAN_RV)
         emit_error("Cleaning collected coverage data failed!")
-    endif()
-    if(SUBMIT)
-        message(STATUS "Submitting to CDash...")
-        ctest_submit(
-            RETRY_COUNT 5
-            RETRY_DELAY 120
-            RETURN_VALUE _SUBMIT_RESULT
-            )
-        if(_SUBMIT_RESULT)
-            emit_warning("Test submission failure detected!")
-        endif()
-    else()
-        message(STATUS "Submit skipped.")
     endif()
 else()
     message(STATUS "Collecting and uploading coverage data skipped.")
